@@ -2,6 +2,8 @@
 <hr />
 
 <form (submit)="guardar()" [formGroup]="miFormulario">
+
+  <!-- Región -->
   <div class="row mb-3">
     <div class="col">
       <label for="" class="form-label"
@@ -13,6 +15,40 @@
       </label>
     </div>
   </div>
+
+  <!-- Paises -->
+  <div class="row mb-3" *ngIf="paises.length !== 0">
+    <div class="col">
+      <label for="" class="form-label"
+        >Paises:
+        <select class="form-control" formControlName="pais">
+          <option value="">-- Seleccione Paises --</option>
+          <option *ngFor="let pais of paises" [value]="pais.alpha3Code | lowercase">{{pais.name}}</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+    <!-- Fronteras -->
+    <div class="row mb-3" *ngIf="fronteras.length !== 0">
+      <div class="col">
+        <label for="" class="form-label"
+          >Fronteras:
+          <select class="form-control" formControlName="frontera">
+            <option value="">-- Seleccione el país fronterizo --</option>
+            <option *ngFor="let frontera of fronteras" [value]="frontera.alpha3Code">{{frontera.name}}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="cargando">
+      <div class="col">
+        <div class="alert alert-primary">
+          Cargando...
+        </div>
+      </div>
+    </div>
 
   <div class="row">
     <div class="col">
